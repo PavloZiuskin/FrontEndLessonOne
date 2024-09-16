@@ -1,12 +1,7 @@
-let numbers = +prompt("Enter a number");
-
-for (let j = 2; j<numbers; j+=1){
-    if(numbers % j === 0){
-        console.log(`This ${numbers} is difficult`);
-        break
-    }
-    if((j+1) === numbers){console.log(numbers);}
-
-
-
+const arrayNew = [1, 3, 4, 6, 2, 5, 7];
+function removeElement(array, item){
+    let elementIndex=0;
+    array.splice(array.indexOf(item), 1);
+    console.log(array);
 }
+removeElement(arrayNew, 4);
