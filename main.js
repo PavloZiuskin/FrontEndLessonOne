@@ -1,7 +1,17 @@
-const arrayNew = [1, 3, 4, 6, 2, 5, 7];
-function summaryNumbers(array){
-    let sum = 0;
-    array.filter(element => {if(typeof(element)==="number"&&!isNaN(element) ){ sum += element}})
-    console.log(sum);
+const writtenString = "Hello, World";
+const removedItems= "l, d";
+
+function removeElements(someWords, deletedItems) {
+    let userWrite=someWords.split("");
+    let userDelete=deletedItems.split("");
+    userWrite.forEach((item)=>{
+        console.log(item);
+        for(let i=0;i<userDelete.length;i++){
+            if(userWrite.includes(userDelete[i]) && userDelete[i] !== " " && userDelete[i] !== ","){
+                userWrite.splice(userWrite.indexOf(userDelete[i]),1);
+            }
+        }
+    })
+    return userWrite.join(" ");
 }
-summaryNumbers([1,"sss",3,true,NaN]);
+console.log(removeElements(writtenString, removedItems));
