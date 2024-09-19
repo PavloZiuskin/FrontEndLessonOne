@@ -1,6 +1,16 @@
-function carryAdd(firstNumber) {
-    return function (secondNumber) {
-        return firstNumber * secondNumber;
+function createSum() {
+    let sum =0;
+     function createSum(firstNumber) {
+         sum += firstNumber;
+         console.log(sum);
+
     }
+    return createSum;
 }
-console.log(carryAdd(3)(4));
+
+const sum=createSum(4);
+
+
+sum(5)
+sum(4)
+sum(20)
