@@ -1,16 +1,9 @@
-function createSum() {
-    let sum =0;
-     function createSum(firstNumber) {
-         sum += firstNumber;
-         console.log(sum);
-
+(function () {
+    for (let i=0; i < 10; i++) {
+        let newNumber= +prompt("Enter a number bigger 100");
+        if (newNumber > 100 ) {
+            console.log(newNumber);
+            return;
+        }
     }
-    return createSum;
-}
-
-const sum=createSum(4);
-
-
-sum(5)
-sum(4)
-sum(20)
+})();
