@@ -1,9 +1,16 @@
-(function () {
-    for (let i=0; i < 10; i++) {
-        let newNumber= +prompt("Enter a number bigger 100");
-        if (newNumber > 100 ) {
-            console.log(newNumber);
-            return;
-        }
+let ladder = {
+    step: 0,
+    up:function () {
+        this.step++;
+        return this;
+    },
+    down: function () {
+        this.step--;
+        return this;
+    },
+    showStep: function () {
+        console.log(this.step);
+        return this;
     }
-})();
+};
+ladder.up().up().down().showStep().up().up().showStep();
