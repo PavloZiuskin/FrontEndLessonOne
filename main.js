@@ -1,13 +1,27 @@
-const numbersArr= [1,2,3,4,5,22,41,169,244,333];
-
-const ewenNumbers =(numArr)=>{
-    let ewensArr=[];
-    numArr.forEach((element)=>{
-        if(element % 2 === 0){
-            ewensArr.push(element);
+const contactBook = {
+    contactsList: [
+        {
+            name: "Doe",
+            phone: "+123456789",
+            email: "fred.doe@example.com"
+        },
+        {
+            name: "Jane",
+            phone: "+987654321",
+            email: "jane.green@example.com"
         }
-    })
-    return ewensArr;
-}
+    ],
 
-console.log(ewenNumbers(numbersArr));
+    findContactByName(name) {
+        return this.contactsList.find(contact => contact.name.toLowerCase() === name.toLowerCase()) || "Contact not found";
+    },
+
+    addContact(name, phone, email) {
+        this.contactsList.push({ name, phone, email });
+        return `Contact ${name} added successfully.`;
+    }
+};
+
+console.log(contactBook.findContactByName("Jane"));
+console.log(contactBook.addContact("Alice", "+111222333", "alice.johnsoniyk@example.com"));
+console.log(contactBook.contactsList);
