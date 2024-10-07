@@ -1,10 +1,10 @@
 .button{
-    width: 100px;
+    width: 200px;
     height: 40px;
+    margin-bottom: 20px;
 }
-.myText{
-    color: red;
-}
-.myText__changeColor{
-    color: blue;
+.photo{
+    display: block;
+    width: 600px;
+    height: 600px;
 }
