@@ -1,27 +1,17 @@
-const contactBook = {
-    contactsList: [
-        {
-            name: "Doe",
-            phone: "+123456789",
-            email: "fred.doe@example.com"
-        },
-        {
-            name: "Jane",
-            phone: "+987654321",
-            email: "jane.green@example.com"
+
+function createTable(tableSize){
+    let myTable = document.querySelector(".table");
+    for (let i = 1; i <= tableSize; i++) {
+        let row = document.createElement("th");
+
+        for (let j = 1; j <= tableSize; j++) {
+            let cell = document.createElement("td");
+            cell.innerHTML = i * j;
+            row.appendChild(cell);
         }
-    ],
+        myTable.appendChild(row);
 
-    findContactByName(name) {
-        return this.contactsList.find(contact => contact.name.toLowerCase() === name.toLowerCase()) || "Contact not found";
-    },
-
-    addContact(name, phone, email) {
-        this.contactsList.push({ name, phone, email });
-        return `Contact ${name} added successfully.`;
     }
-};
 
-console.log(contactBook.findContactByName("Jane"));
-console.log(contactBook.addContact("Alice", "+111222333", "alice.johnsoniyk@example.com"));
-console.log(contactBook.contactsList);
+};
+console.log(createTable(13));
