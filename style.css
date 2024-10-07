@@ -1,13 +1,10 @@
-tbody{
-    display: grid;
-    width: 100%;
-}
-th{
-    width: 100%;
-    border: 1px solid black;
-}
-td{
-    width: 40px;
+.button{
+    width: 100px;
     height: 40px;
-
+}
+.myText{
+    color: red;
+}
+.myText__changeColor{
+    color: blue;
 }
