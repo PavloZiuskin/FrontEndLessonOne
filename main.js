@@ -1,11 +1,9 @@
-const enteredButton = document.querySelector('.button__add_link');
-const redirectionButton = document.querySelector('.button__redirect');
-let redirectionLink = '';
 
-enteredButton.addEventListener('click', e => {
-    redirectionLink = prompt("Please enter a valid URL");
-    redirectionButton.setAttribute('href', redirectionLink);
+const parentButton = document.querySelector('.button__div');
+
+parentButton.addEventListener('click', (e) => {
+    if (e.target.nodeName === 'BUTTON'){
+        alert(`Your chose was: ${e.target.innerText}`);
+    }
 })
-redirectionButton.addEventListener('click', () => {
-    location.assign(redirectionLink)
-})
+
