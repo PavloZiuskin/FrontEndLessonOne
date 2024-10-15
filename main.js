@@ -1,9 +1,21 @@
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
 
-const parentButton = document.querySelector('.button__div');
-
-parentButton.addEventListener('click', (e) => {
-    if (e.target.nodeName === 'BUTTON'){
-        alert(`Your chose was: ${e.target.innerText}`);
+addTaskBtn.addEventListener('click', () =>{
+    const taskText = taskInput.value.trim();
+    if (taskText !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = `${taskText} <button class="delete-btn">Видалити</button>`;
+        taskList.appendChild(li);
+        taskInput.value = '';
     }
-})
+});
+
+taskList.addEventListener('click', (e) =>{
+    if (e.target.classList.contains('delete-btn')) {
+        const li = e.target.parentElement;
+        taskList.removeChild(li);
+    }
+});
 
