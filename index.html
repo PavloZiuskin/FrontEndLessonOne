@@ -7,11 +7,22 @@
 </head>
 <body>
 <div class="container">
-    <h1>Список завдань</h1>
-    <input type="text" id="taskInput" placeholder="Нове завдання...">
-    <button id="addTaskBtn">Додати завдання</button>
-    <ul id="taskList"></ul>
-</div>
+    <h2>Надіслати повідомлення</h2>
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Ваше ім'я">
+        <div class="error" id="nameError"></div>
+
+        <input type="text" id="phone" placeholder="Номер телефону (+380)">
+        <div class="error" id="phoneError"></div>
+
+        <input type="email" id="email" placeholder="Ваш email">
+        <div class="error" id="emailError"></div>
+
+        <textarea id="message" rows="4" placeholder="Ваше повідомлення"></textarea>
+        <div class="error" id="messageError"></div>
+
+        <button type="submit">Відправити</button>
+    </form>
 
 
 
