@@ -1,49 +1,71 @@
-document.getElementById('contactForm').addEventListener('submit', (e) =>{
-    e.preventDefault();
+const photoLinkArr=["image/0001.jpg","image/0002.jpg","image/0003.jpg","image/0004.jpg","image/0005.jpg","image/0006.jpg","image/0007.jpg","image/0008.jpg","image/0009.jpg"];
+const prevBtn=document.querySelector(".prev-btn");
+const nextBtn=document.querySelector(".next-btn");
+const sliderPhoto  = document.querySelector(".slider-photo");
+const slider = document.querySelector(".container");
+const dotSliderBtn=document.querySelector(".dot-slider");
 
-    document.getElementById('nameError').textContent = '';
-    document.getElementById('phoneError').textContent = '';
-    document.getElementById('emailError').textContent = '';
-    document.getElementById('messageError').textContent = '';
+let counter = 0;
+const photoLinkLength = photoLinkArr.length;
+sliderPhoto.src =photoLinkArr[0];
+for (let i = 0; i < photoLinkLength; i++) {
+    dotSliderBtn.innerHTML =`${dotSliderBtn.innerHTML} <button class='dot-btn'>${i}</button>`;
+}
 
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    const phoneRegex = /^\+380\d{9}$/;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    let isValid = true;
-
-    if (name === '') {
-        document.getElementById('nameError').textContent = 'Ім\'я обов\'язкове';
-        isValid = false;
-    }
-
-    if (!phoneRegex.test(phone)) {
-        document.getElementById('phoneError').textContent = 'Телефон повинен починатися з +380 і містити 9 цифр після';
-        isValid = false;
-    }
-
-    if (!emailRegex.test(email)) {
-        document.getElementById('emailError').textContent = 'Невірний формат email';
-        isValid = false;
-    }
-
-    if (message.length < 5) {
-        document.getElementById('messageError').textContent = 'Повідомлення повинно містити не менше 5 символів';
-        isValid = false;
-    }
-
-    if (isValid) {
-        console.log({
-            name: name,
-            phone: phone,
-            email: email,
-            message: message
-        });
-        alert('Повідомлення надіслано успішно!');
-    }
+slider.addEventListener("click",(event)=>{
+changePhotoBtn(event);
 });
+dotSliderBtn.addEventListener("click",(event)=>{
+    if (event.target.classList.contains("dot-btn")){
+    counter = +event.target.innerText;
+        if(counter!==0 || counter !== photoLinkLength-1){
+                removeAttr(nextBtn);
+                removeAttr(prevBtn);
+                removeAttr(event.currentTarget.children[0]);
+                removeAttr(event.currentTarget.lastChild);}
+        if(counter !== photoLinkLength-1){
+                removeAttr(nextBtn);
+                removeAttr(event.currentTarget.lastChild);}
+        if(counter === 0) {
+                addAttr(prevBtn);
+                addAttr(event.currentTarget.children[0]);
+        }
+        if (counter ===1) {
+                removeAttr(prevBtn);
+                removeAttr(event.currentTarget.children[0]);}
+        if(counter+1 === photoLinkLength) {
+                addAttr(nextBtn);
+                addAttr(event.currentTarget.lastChild);}
+    setLink();
+    }
+})
 
+const removeAttr = (targetBtn)=>{targetBtn.removeAttribute("disabled");}
+const addAttr = (targetBtn)=>{targetBtn.setAttribute("disabled", true);}
+const setLink=()=>{sliderPhoto.src=photoLinkArr[counter];}
+const changePhotoBtn=(e)=>{
+    if(e.target === nextBtn){
+        counter++;
+        if (counter===1) {
+            removeAttr(prevBtn);
+            removeAttr(dotSliderBtn.children[0]);
+            }
+        if(counter+1 === photoLinkLength) {
+            addAttr(nextBtn);
+            addAttr(dotSliderBtn.lastChild);}
+        setLink();
+    }
+    if(e.target === prevBtn){
+        counter--;
+        if(counter !== photoLinkLength){
+            removeAttr(nextBtn);
+            removeAttr(dotSliderBtn.lastChild);
+        }
+        if(counter === 0) {
+            addAttr(prevBtn);
+            addAttr(dotSliderBtn.children[0]);
+        }
+        setLink();
+    }
+}
+addAttr(dotSliderBtn.children[0])
