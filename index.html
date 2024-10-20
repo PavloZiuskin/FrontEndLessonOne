@@ -6,19 +6,15 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<h2 class="title">Swipe photo</h2>
-<div class="container">
-    <div class="slider">
-        <button class="button-slider prev-btn" type="button" disabled >Prev</button>
-        <img src="" alt="photo" class="slider-photo">
-        <button class="button-slider next-btn" type="button">Next</button>
-    </div>
-    <div class="dot-slider">
-    </div>
+<div class="slider-container">
+    <button class="prev hidden" id="prevBtn">Prev</button>
 
+    <div class="slider" id="slider"></div>
 
+    <button class="next" id="nextBtn">Next</button>
 </div>
 
+<div class="dots-container" id="dotsContainer"></div>
 
 
 <script src="main.js"></script>
