@@ -1,77 +1,73 @@
-const images = [
-    "image/0001.jpg",
-    "image/0002.jpg",
-    "image/0003.jpg",
-    "image/0004.jpg",
-    "image/0005.jpg",
-    "image/0006.jpg",
-    "image/0007.jpg",
-    "image/0008.jpg",
-    "image/0009.jpg",
-];
-const slider = document.getElementById('slider');
-const dotsContainer = document.getElementById('dotsContainer');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+document.addEventListener('DOMContentLoaded', loadTodos);
+const form = document.querySelector('.js--form');
+const input = document.querySelector('.js--form__input');
+const todosWrapper = document.querySelector('.js--todos-wrapper');
 
-let currentSlide = 0;
-const maxDots = 3;
-function createSlider(images) {
-    images.forEach((image, index) => {
-        const img = document.createElement('img');
-        img.src = image;
-        img.alt = `Image ${index + 1}`;
-        img.classList.add('slide');
-        if (index === 0) img.classList.add('active');
-        slider.appendChild(img);
+function loadTodos() {
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    todos.forEach(todo => {
+        addTodoToDOM(todo.text, todo.completed);
     });
 }
-function createDots() {
-    for (let i = 0; i < maxDots; i++) {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        if (i === 1) dot.classList.add('active');
-        dot.addEventListener('click', () => handleDotClick(i));
-        dotsContainer.appendChild(dot);
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const taskText = input.value.trim();
+    if (taskText !== '') {
+        addTodoToDOM(taskText, false);
+        saveTodoToLocalStorage(taskText, false);
+        input.value = '';
     }
-}
-function handleDotClick(dotIndex) {
-    if (dotIndex === 0) {
-        prevSlide();
-    } else if (dotIndex === 2) {
-        nextSlide();
+});
+
+function addTodoToDOM(text, completed) {
+    const li = document.createElement('li');
+    li.classList.add('todo-item');
+    if (completed) {
+        li.classList.add('todo-item--checked');
     }
+
+    li.innerHTML = `
+        <input type="checkbox" ${completed ? 'checked' : ''}>
+        <span class="todo-item__description">${text}</span>
+        <button class="todo-item__delete">Видалити</button>
+    `;
+
+    li.querySelector('input[type="checkbox"]').addEventListener('change', function() {
+        toggleTodoCompletion(text, li);
+    });
+
+    li.querySelector('.todo-item__delete').addEventListener('click', function() {
+        deleteTodoFromDOM(li, text);
+    });
+
+    todosWrapper.appendChild(li);
 }
-function showSlide(index) {
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    slides[index].classList.add('active');
-    if (index === 0) {
-        dots[0].classList.add('active');
-    } else if (index === slides.length - 1) {
-        dots[2].classList.add('active');
-    } else {
-        dots[1].classList.add('active');
-    }
-    prevBtn.classList.toggle('hidden', index === 0);
-    nextBtn.classList.toggle('hidden', index === slides.length - 1);
+
+function saveTodoToLocalStorage(text, completed) {
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    todos.push({ text, completed });
+    localStorage.setItem('todos', JSON.stringify(todos));
 }
-function nextSlide() {
-    if (currentSlide < images.length - 1) {
-        currentSlide++;
-        showSlide(currentSlide);
-    }
+
+function toggleTodoCompletion(text, li) {
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const updatedTodos = todos.map(todo => {
+        if (todo.text === text) {
+            todo.completed = !todo.completed;
+        }
+        return todo;
+    });
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
+
+    li.classList.toggle('todo-item--checked');
 }
-function prevSlide() {
-    if (currentSlide > 0) {
-        currentSlide--;
-        showSlide(currentSlide);
-    }
+
+function deleteTodoFromDOM(li, text) {
+    li.remove();
+
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const updatedTodos = todos.filter(todo => todo.text !== text);
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
 }
-nextBtn.addEventListener('click', nextSlide);
-prevBtn.addEventListener('click', prevSlide);
-createSlider(images);
-createDots();
-showSlide(currentSlide);
