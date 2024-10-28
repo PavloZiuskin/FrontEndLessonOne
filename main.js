@@ -1,20 +1,29 @@
-class Coach {
-    constructor(name, age, rating) {
-        this.name = name;
-        this.age = age;
-        this.rating = rating;
+class BankAccount {
+    constructor(balance) {
+        this.balance = balance;
     }
-    displayInfo(){
-        console.log( `Coach: ${this.name}, Specialization: ${this.age}, Rating: ${this.rating}`);
+    getBalance(){
+        return this.balance;
     }
+    deposit(putMoney){
+        return this.balance += putMoney;
+    }
+    withdraw(getMoney){
+        return this.balance -= getMoney;
+    }
+
 }
 
-const coach1 = new Coach('John Doe', 'Fitness', 4.7);
+const account1 = new BankAccount(1000);
 
-const coach2 = new Coach('Alice Smith', 'Yoga', 4.9);
+console.log(account1.getBalance()); // 1000
 
-coach1.displayInfo();
+account1.deposit(500);
 
-coach2.displayInfo();
+console.log(account1.getBalance()); // 1500
+
+account1.withdraw(200);
+
+console.log(account1.getBalance()); // 1300
 
 
