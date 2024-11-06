@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Таймер відліку</title>
+    <title>Weather in Kyiv</title>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<div id="timer">00:00</div>
+<div id="weather-widget">
+    <h3>Погода</h3>
+    <div id="weather-info" class="weather-info">Завантаження...</div>
+    <button onclick="getWeather()">Оновити</button>
+</div>
 
 <script src="main.js"></script>
 </body>

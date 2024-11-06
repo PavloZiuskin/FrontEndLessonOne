@@ -1,5 +1,12 @@
-#timer {
-    font-size: 2em;
-    font-weight: bold;
-    margin-top: 20px;
+#weather-widget {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    background-color: #f2f2f2;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+.weather-info {
+    margin: 10px 0;
 }
