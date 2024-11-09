@@ -7,11 +7,19 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<div id="weather-widget">
-    <h3>Погода</h3>
-    <div id="weather-info" class="weather-info">Завантаження...</div>
-    <button onclick="getWeather()">Оновити</button>
-</div>
+
+<h1>Пости</h1>
+<div id="postContainer"></div>
+
+<h2>Створити новий пост</h2>
+<form id="newPostForm">
+    <label for="title">Заголовок:</label><br>
+    <input type="text" id="title" name="title" required><br><br>
+    <label for="body">Текст:</label><br>
+    <textarea id="body" name="body" required></textarea><br><br>
+    <button type="submit">Створити пост</button>
+</form>
+<p id="message"></p>
 
 <script src="main.js"></script>
 </body>
