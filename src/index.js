@@ -1,6 +1,7 @@
 import { getPosts, getComments, createPost } from './js/api.js';
 import { renderPosts, renderComments, clearForm, showAlert } from './js/ui.js';
 
+
 document.addEventListener('DOMContentLoaded', async () => {
     const posts = await getPosts();
     renderPosts(posts, loadComments);
